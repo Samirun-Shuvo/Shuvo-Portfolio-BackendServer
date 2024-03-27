@@ -7,7 +7,7 @@ app.use(cors()); // Use cors middleware to enable CORS
 const port = 5000;
 
 app.get("/", (req, res) => {
-  res.send("Shuvo Portfolio Next+Express Is Running");
+  res.send("Shuvo Portfolio Next+Express");
 });
 
 app.get("/projects", (req, res) => {
