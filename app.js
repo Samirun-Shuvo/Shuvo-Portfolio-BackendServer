@@ -1,10 +1,17 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors"); // Import cors package
 
 const app = express();
 app.use(cors()); // Use cors middleware to enable CORS
 
 const port = 5000;
+
+// localhost:27017
+mongoose
+  .connect("mongodb://localhost/todos")
+  .then(() => console.log(successful))
+  .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
   res.send("Shuvo Portfolio Next+Express");
