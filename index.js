@@ -37,7 +37,7 @@ async function run() {
         res
           .status(500)
           .send({
-            message: "Failed to fetch projects",
+            message: "Failed to fetch projects collection",
             error: error.toString(),
           });
       }
