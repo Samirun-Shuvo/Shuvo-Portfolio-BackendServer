@@ -26,6 +26,7 @@ async function run() {
     const projectCollections = client
       .db("portfolio_project")
       .collection("projects");
+    const adminCollections = client.db("portfolio_project").collection("admin");
 
     app.get("/projects", async (req, res) => {
       try {
@@ -34,12 +35,33 @@ async function run() {
         const projects = await cursor.toArray();
         res.send(projects);
       } catch (error) {
-        res
-          .status(500)
-          .send({
-            message: "Failed to fetch projects collection",
-            error: error.toString(),
+        res.status(500).send({
+          message: "Failed to fetch projects collection",
+          error: error.toString(),
+        });
+      }
+    });
+    app.post("/login", async (req, res) => {
+      try {
+        const clientData = await req.body.data;
+        const mainData = await adminCollections.findOne(clientData);
+
+        if (mainData) {
+          const token = Math.random().toString(36);
+          mainData.token = token;
+          const updateMainData = await adminCollections.updateOne(clientData, {
+            $set: { token: token },
           });
+          if (updateMainData.modifiedCount === 0) {
+            return res.json({ status: "faild", message: "Faild to loging" });
+          }
+
+          res.json({ status: "success", data: mainData });
+        } else {
+          res.json({ status: "faild", message: "Faild to loging" });
+        }
+      } catch (error) {
+        console.log(error);
       }
     });
 
