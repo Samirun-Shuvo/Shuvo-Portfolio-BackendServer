@@ -55,8 +55,8 @@ async function run() {
           if (updateMainData.modifiedCount === 0) {
             return res.json({ status: "faild", message: "Faild to loging" });
           }
-
-          res.json({ status: "success", data: mainData });
+          mainData.status = "success";
+          res.json(mainData );
         } else {
           res.json({ status: "faild", message: "Faild to loging" });
         }
