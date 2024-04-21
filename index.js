@@ -67,7 +67,7 @@ async function run() {
 
     // Moved the listening to the server inside the run function to ensure it starts after a successful DB connection
     app.get("/", (req, res) => {
-      res.send("Hello from Shuvo Portfolio!");
+      res.send("Hello from: Shuvo Portfolio!");
     });
 
     app.listen(port, () => {
